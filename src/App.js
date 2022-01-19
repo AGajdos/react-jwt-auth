@@ -12,7 +12,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-
+import Proba from "./sajatosztalyok/Proba";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +56,11 @@ class App extends Component {
                 Home
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to={"/Proba"} className="nav-link">
+                Próba
+              </Link>
+            </li>
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
@@ -121,6 +125,7 @@ class App extends Component {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/Proba" component={Proba} />
           </Switch>
         </div>
       </div>
