@@ -13,6 +13,7 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import Proba from "./sajatosztalyok/Proba";
+import Mell from "./sajatosztalyok/Mell";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +60,11 @@ class App extends Component {
             <li className="nav-item">
               <Link to={"/Proba"} className="nav-link">
                 Próba
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/Mell"} className="nav-link">
+                Mell
               </Link>
             </li>
             {showModeratorBoard && (
@@ -126,6 +132,8 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/Proba" component={Proba} />
+            <Route path="/Mell" component={Mell} />
+
           </Switch>
         </div>
       </div>
