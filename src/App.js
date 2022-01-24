@@ -12,7 +12,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-import Proba from "./sajatosztalyok/Proba";
+import Torles from "./sajatosztalyok/Torles";
 import Mell from "./sajatosztalyok/Mell";
 class App extends Component {
   constructor(props) {
@@ -57,11 +57,11 @@ class App extends Component {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to={"/Proba"} className="nav-link">
-                Próba
+            {/*<li className="nav-item">
+              <Link to={"/Torles"} className="nav-link">
+                Törlés
               </Link>
-            </li>
+    </li>*/}
             <li className="nav-item">
               <Link to={"/Mell"} className="nav-link">
                 Mell
@@ -80,7 +80,12 @@ class App extends Component {
                 <Link to={"/admin"} className="nav-link">
                   Admin Lap
                 </Link>
-              </li>
+              </li>,
+              <li className="nav-item">
+              <Link to={"/Torles"} className="nav-link">
+                Gyakorlat törlése
+              </Link>
+            </li>
             )}
 
             {currentUser && (
@@ -131,7 +136,7 @@ class App extends Component {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
-            <Route path="/Proba" component={Proba} />
+            <Route path="/Torles" component={Torles} />
             <Route path="/Mell" component={Mell} />
 
           </Switch>
