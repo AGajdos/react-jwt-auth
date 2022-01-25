@@ -14,7 +14,7 @@ export default class FetchExample extends React.Component {
       bevitel1:szam
     }
 
-  fetch("http://localhost:8080/torles", {
+  fetch("http://localhost:8080/torles2", {
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -22,13 +22,11 @@ export default class FetchExample extends React.Component {
   
   )
   .then(x => x.text())
-  .then(y => alert(y));
+  .then(y => {alert(y);this.lekerdezes();});
 
   }
-
-
-  componentDidMount(){
-    return fetch('http://localhost:8080/gyakorlatok')
+lekerdezes=()=>{
+  return fetch('http://localhost:8080/izomcsoport')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -42,8 +40,16 @@ export default class FetchExample extends React.Component {
       })
       .catch((error) =>{
         console.error(error);
+        
       });
   }
+
+  componentDidMount(){
+    this.lekerdezes()
+    
+}
+
+
 
 
 
@@ -64,12 +70,12 @@ export default class FetchExample extends React.Component {
           renderItem={({item}) => 
 
           <View >
-          <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.gyakorlat_nev} </Text>
-          <Image  source={{uri: 'http://localhost:8080/'+item.gyakorlat_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />  
+          <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.izom_nev} </Text>
+          <Image  source={{uri: 'http://localhost:8080/'+item.izom_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />  
 
           <TouchableOpacity
         style={styles.kekgomb}
-        onPress={async ()=>this.szavazat(item.id_gyakorlatok)}
+        onPress={async ()=>this.szavazat(item.izom_id)}
       >
         <Text style={{color:"white",fontWeight:"bold",fontSize:15}}  >Törlés</Text>
       </TouchableOpacity>
@@ -78,7 +84,7 @@ export default class FetchExample extends React.Component {
         }
 
         
-          keyExtractor={({id_gyakorlatok}, index) => id_gyakorlatok}
+          keyExtractor={({izom_id}, index) => izom_id}
         />
       </View>
     );

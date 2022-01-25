@@ -13,7 +13,9 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import Torles from "./sajatosztalyok/Torles";
+import Izomcsoporttorles from "./sajatosztalyok/Izomcsoporttorles";
 import Mell from "./sajatosztalyok/Mell";
+import Forum from "./sajatosztalyok/Forum";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,14 +59,15 @@ class App extends Component {
                 Home
               </Link>
             </li>
-            {/*<li className="nav-item">
-              <Link to={"/Torles"} className="nav-link">
-                Törlés
-              </Link>
-    </li>*/}
+           
             <li className="nav-item">
               <Link to={"/Mell"} className="nav-link">
                 Mell
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/Forum"} className="nav-link">
+                Fórum
               </Link>
             </li>
             {showModeratorBoard && (
@@ -76,16 +79,17 @@ class App extends Component {
             )}
 
             {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Lap
-                </Link>
-              </li>,
+              
               <li className="nav-item">
               <Link to={"/Torles"} className="nav-link">
-                Gyakorlat törlése
+                Gy törlése
               </Link>
-            </li>
+            </li>,
+            <li className="nav-item">
+            <Link to={"/Izomcsoporttorles"} className="nav-link">
+              ICS törlése
+            </Link>
+          </li>
             )}
 
             {currentUser && (
@@ -137,7 +141,9 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/Torles" component={Torles} />
+            <Route path="/Izomcsoporttorles" component={Izomcsoporttorles} />
             <Route path="/Mell" component={Mell} />
+            <Route path="/Forum" component={Forum} />
 
           </Switch>
         </div>

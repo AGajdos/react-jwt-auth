@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyleSheet, FlatList, ActivityIndicator, Text, View, Image , TouchableOpacity } from 'react-native';
+import {StyleSheet, FlatList, ActivityIndicator, Text, View, Image , TouchableOpacity } from 'react-native-web';
 
 export default class Mell extends React.Component {
 
