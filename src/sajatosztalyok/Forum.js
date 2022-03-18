@@ -17,7 +17,7 @@ export default class Komment extends Component {
   }
   
   componentDidMount(){
-    return fetch('http://'+ipcim+':8080/kommentfelvitel')
+    return fetch('http://'+ipcim+':8080/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -40,7 +40,7 @@ export default class Komment extends Component {
     //alert(szam)
     this.setState({})
 
-    return fetch('http://'+ipcim+':8080/kommentfelvitel')
+    return fetch('http://'+ipcim+':8080/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -80,8 +80,8 @@ export default class Komment extends Component {
   render() {
     return (
 
-        <View>
-
+        <View style={{}}>
+            
         <Bevitel tema_bevitel={this.state.tema}  frissit={()=>this.ujratoltes()}  />
 
         <Text style={{fontSize:30, textAlign:'center', marginTop:25}}>Megjegyzések</Text>
@@ -89,14 +89,14 @@ export default class Komment extends Component {
           data={this.state.dataSource}
           renderItem={({item}) => 
 
-          <View style={{backgroundColor:'lightblue', borderRadius:15, margin:10}}>
+          <View style={{backgroundColor:"#B9F3EA", borderRadius:15, margin:10}}>
 
           <Text style={{color:"#dd00cc",fontSize:18,marginTop:5, marginLeft:10}}>
-          {item.uzenet_nev} </Text>
+          {item.k_nev} </Text>
           <Text style={{color:"black",fontSize:20, marginLeft:10}}>
-          {item.uzenet_szoveg} </Text>
+          {item.k_szoveg} </Text>
           <Text style={{color:"black",fontSize:12, marginRight:10, marginBottom:5, textAlign:'right'}}>
-          {item.uzenet_datum} </Text>
+          {item.k_datum} </Text>
      
           
    
@@ -104,7 +104,7 @@ export default class Komment extends Component {
         
         }
     
-          keyExtractor={({uzenet_id}, index) => uzenet_id}
+          keyExtractor={({k_id}, index) => k_id}
         />
     </View>
     );

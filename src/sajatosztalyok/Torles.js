@@ -27,24 +27,30 @@ export default class FetchExample extends React.Component {
   }
 
 
-  componentDidMount(){
+
+  lekerdezes=()=>{
     return fetch('http://localhost:8080/gyakorlatok')
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson,
-        }, function(){
-
+        .then((response) => response.json())
+        .then((responseJson) => {
+  
+          this.setState({
+            isLoading: false,
+            dataSource: responseJson,
+          }, function(){
+  
+          });
+  
+        })
+        .catch((error) =>{
+          console.error(error);
+          
         });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+    }
+  
+    componentDidMount(){
+      this.lekerdezes()
+      
   }
-
 
 
   render(){

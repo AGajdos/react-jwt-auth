@@ -41,7 +41,7 @@ export default class Mell extends React.Component {
   
 
     return(
-      <View style={{ backgroundColor:"#DCF9F4"}}>
+      <View style={{}}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 

@@ -16,6 +16,7 @@ import Torles from "./sajatosztalyok/Torles";
 import Izomcsoporttorles from "./sajatosztalyok/Izomcsoporttorles";
 import Mell from "./sajatosztalyok/Mell";
 import Forum from "./sajatosztalyok/Forum";
+import Adatfelvitel from "./sajatosztalyok/Adatfelvitel";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -70,6 +71,7 @@ class App extends Component {
                 Fórum
               </Link>
             </li>
+            
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
@@ -84,14 +86,29 @@ class App extends Component {
               <Link to={"/Torles"} className="nav-link">
                 Gy törlése
               </Link>
-            </li>,
-            <li className="nav-item">
+            </li>
+            
+            )}
+            {showAdminBoard && (
+              
+              <li className="nav-item">
             <Link to={"/Izomcsoporttorles"} className="nav-link">
               ICS törlése
             </Link>
           </li>
+            
             )}
 
+            {showAdminBoard && (
+              <li className="nav-item">
+              <Link to={"/Adatfelvitel"} className="nav-link">
+              Adatfelvítel
+              </Link>
+            </li>
+             
+            
+            )}
+            
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
@@ -144,6 +161,7 @@ class App extends Component {
             <Route path="/Izomcsoporttorles" component={Izomcsoporttorles} />
             <Route path="/Mell" component={Mell} />
             <Route path="/Forum" component={Forum} />
+            <Route path="/Adatfelvitel" component={Adatfelvitel} />
 
           </Switch>
         </div>
