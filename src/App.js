@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
+
+
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
@@ -17,6 +18,16 @@ import Izomcsoporttorles from "./sajatosztalyok/Izomcsoporttorles";
 import Mell from "./sajatosztalyok/Mell";
 import Forum from "./sajatosztalyok/Forum";
 import Adatfelvitel from "./sajatosztalyok/Adatfelvitel";
+import Fooldal from "./sajatosztalyok/Fooldal";
+import Hat from "./sajatosztalyok/Hat";
+import Bicepsz from "./sajatosztalyok/Bicepsz";
+import Comb from "./sajatosztalyok/Comb";
+import Tricepsz from "./sajatosztalyok/Tricepsz";
+import Vadli from "./sajatosztalyok/Vadli";
+import Vall from "./sajatosztalyok/Vall";
+import Kommenttorles from "./sajatosztalyok/Kommenttorles";
+import Kereses from "./sajatosztalyok/Kereses";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -50,110 +61,72 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            bezKoder
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
-           
-            <li className="nav-item">
-              <Link to={"/Mell"} className="nav-link">
-                Mell
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/Forum"} className="nav-link">
-                Fórum
-              </Link>
-            </li>
-            
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
 
-            {showAdminBoard && (
-              
-              <li className="nav-item">
-              <Link to={"/Torles"} className="nav-link">
-                Gy törlése
-              </Link>
-            </li>
-            
-            )}
-            {showAdminBoard && (
-              
-              <li className="nav-item">
-            <Link to={"/Izomcsoporttorles"} className="nav-link">
-              ICS törlése
-            </Link>
-          </li>
-            
-            )}
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand href="Fooldal">
+        
+        Főoldal
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          
 
-            {showAdminBoard && (
-              <li className="nav-item">
-              <Link to={"/Adatfelvitel"} className="nav-link">
-              Adatfelvítel
-              </Link>
-            </li>
-             
-            
-            )}
-            
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
-          </div>
-
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
+        <NavDropdown title="Gyakorlatok" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="Mell">Mell gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Hat">Hát gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Vall">Váll gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Bicepsz">Bicepsz gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Tricepsz">Tricepsz gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Comb">Comb gyakorlatok</NavDropdown.Item>
+            <NavDropdown.Item href="Vadli">Vádli gyakorlatok</NavDropdown.Item>
+          </NavDropdown>
+          
+          <Nav.Link href="Forum">Fórum</Nav.Link>
+          <Nav.Link href="Kereses">Keresés</Nav.Link>
+          
+          
+          {showAdminBoard && (
+          <NavDropdown title="Admin" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="Torles">Gyakorlat törlése</NavDropdown.Item>
+            <NavDropdown.Item href="Izomcsoporttorles">Itomcsoport törlése</NavDropdown.Item>
+            <NavDropdown.Item href="Adatfelvitel">Adatfelvitel</NavDropdown.Item>
+            <NavDropdown.Item href="Kommenttorles">Kommenttörlés</NavDropdown.Item>
+          </NavDropdown>
           )}
-        </nav>
+        </Nav>
+        <Nav>
+        {currentUser ? (
+          <Nav className="mr-auto">
+          <Nav.Link href="">
+            {currentUser.username}
+            </Nav.Link>
+            <Nav.Link href="/login" onClick={this.logOut}>
+            Kijeletkezés
+            </Nav.Link>
+            </Nav>
+          ) : (
+            
+            <Nav className="mr-auto">
+            <Nav.Link href="/login">
+            Bejelenkezés
+              </Nav.Link>
+              <Nav.Link href="/register">
+              Regisztráció
+              </Nav.Link>
+              </Nav>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path={["/", "/Fooldal"]} component={Fooldal} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
+           
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
@@ -162,7 +135,15 @@ class App extends Component {
             <Route path="/Mell" component={Mell} />
             <Route path="/Forum" component={Forum} />
             <Route path="/Adatfelvitel" component={Adatfelvitel} />
-
+            <Route path="/Fooldal" component={Fooldal} />
+            <Route path="/Hat" component={Hat} />
+            <Route path="/Bicepsz" component={Bicepsz} />
+            <Route path="/Comb" component={Comb} />
+            <Route path="/Tricepsz" component={Tricepsz} />
+            <Route path="/Vadli" component={Vadli} />
+            <Route path="/Vall" component={Vall} />
+            <Route path="/Kommenttorles" component={Kommenttorles} />
+            <Route path="/Kereses" component={Kereses} />
           </Switch>
         </div>
       </div>

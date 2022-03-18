@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet,Text, TextInput, View,TouchableOpacity } from 'react-native-web';
+import { StyleSheet,Text, TextInput, View,TouchableOpacity,Picker } from 'react-native-web';
+import FileUpload from "./upload";
 
 const ipcim="localhost";
 
@@ -10,27 +11,44 @@ export default class Adatfelvitel extends Component {
 
         nev: '',
         kep:"",
-        komment:""
-
+        komment:"",
+        gyakid:"",
+        valaszt:0,
+        dataSource_izom:[]
+      
     };
   }
 
-felvitel=async ()=>{
-    //alert("megnyomva a gomb")
+  componentDidMount(){
+    return fetch('http://localhost:8080/izom')
+      .then((response) => response.json())
+      .then((responseJson) => {
 
-    if (this.state.nev=="" || this.state.komment=="" || this.state.kep==""|| this.state.gyakid=="" )
-    {
-      alert("Add meg a nevet, képet és a kommmentet!")
-      return
-    }
+        this.setState({
+          isLoading: false,
+          dataSource_izom: responseJson,
+        }, function(){
+
+        });
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
+
+felvitel=async ()=>{
+    alert("megnyomva a gomb")
+
+  
     let bemenet={
       bevitel1:this.state.nev,
       bevitel2:this.state.kep,
       bevitel3:this.state.komment,
-      bevitel4:this.state.gyakid
+      bevitel4:this.state.valaszt
     }
 
-    fetch('http://'+ipcim+':8080/adatfelvitel',{
+    fetch('http://'+ipcim+':8080/adatfelvitel2',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -54,9 +72,9 @@ felvitel=async ()=>{
 
   render() {
     return (
-      <View style = {{backgroundColor:"#42f598",}}>
+      <View style = {{backgroundColor:"#42f598",borderRadius:20}}>
         
-        <Text style={{fontSize:30, textAlign:'center', marginTop:5, marginBottom:10}}>Írj véleményt vagy új gyakorlatot</Text>
+        <Text style={{fontSize:30, textAlign:'center', marginTop:5, marginBottom:10}}>Új gyakorlat hozzáadása</Text>
         <View style={{padding: 10 }}>
             <Text style={{color:'black', fontSize:25}}>
                 Gyakorlat név:
@@ -68,49 +86,43 @@ felvitel=async ()=>{
             onChangeText={(nev) => this.setState({nev})}
             value={this.state.nev}
           />
-          <Text style={{color:'black', fontSize:25}}>
-                Kép:
-            </Text>
-          <TextInput
-            placeholderTextColor="black"
-            style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:30}}
-            placeholder="Add meg a képet:"
-            onChangeText={(kep) => this.setState({kep})}
-            value={this.state.kep}
-          />
+         
   
           <Text style={{color:'black',fontSize:25}}>
                 Gyakorlat leírás
             </Text>
           <TextInput
             placeholderTextColor="black"
-            style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:30}}
+            style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:150}}
             placeholder=" Add meg a leírást:"
             onChangeText={(komment) => this.setState({komment})}
             value={this.state.komment}
+            multiline={true}
+            numberOfLines={4}
           />
-
-<Text style={{color:'black',fontSize:25}}>
-                Izomcsoport id
-            </Text>
-          <TextInput
-            placeholderTextColor="black"
-            style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:30}}
-            placeholder=" Add meg a izomcsoport id-t"
-            onChangeText={(gyakid) => this.setState({gyakid})}
-            value={this.state.gyakid}
-          />
+          
+          
 
           
-           <TouchableOpacity
-            onPress={async ()=>this.felvitel()}>
-            <View style={styles.gomb}>
-              <Text style={styles.gombSzoveg}>Küldés</Text>
-            </View>
-          </TouchableOpacity> 
-  
+          
+          <Picker
+        selectedValue={this.state.valaszt}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => this.setState({valaszt:itemValue})}
+      >
+        {this.state.dataSource_izom.map((item) => (
+          <Picker.Item key={item.film_id} label={item.izom_nev} value={item.izom_id} />
+        ))}
+       
+       
+      </Picker>
+
+           
+          <FileUpload nev={this.state.nev}  kep={this.state.kep} komment={this.state.komment} valaszt={this.state.valaszt}></FileUpload>
+          
+          
           </View>
-  
+        
       </View>
     );
   }

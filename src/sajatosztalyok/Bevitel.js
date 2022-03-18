@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,Text, TextInput, View,TouchableOpacity } from 'react-native';
+import { StyleSheet,Text, TextInput, View,TouchableOpacity } from 'react-native-web';
 
 const ipcim="localhost";
 
@@ -43,11 +43,9 @@ felvitel=async ()=>{
     
 }
 
-
-
   render() {
     return (
-      <View style = {{backgroundColor:"#42f598",}}>
+      <View style = {{backgroundColor:"#42f598",borderRadius:20}}>
         
         <Text style={{fontSize:30, textAlign:'center', marginTop:5, marginBottom:10,textdecoration: "underline"}}>Írj véleményt vagy új gyakorlatot</Text>
         <View style={{padding: 10 }}>

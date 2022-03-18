@@ -9,11 +9,12 @@ export default class FetchExample extends React.Component {
   }
 
   szavazat=(szam)=>{
+    //alert(szam)
     var bemenet={
       bevitel1:szam
     }
 
-  fetch("http://localhost:8080/torles", {
+  fetch("http://localhost:8080/torles3", {
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -25,7 +26,7 @@ export default class FetchExample extends React.Component {
 
   }
 lekerdezes=()=>{
-  return fetch('http://localhost:8080/gyakorlatok')
+  return fetch('http://localhost:8080/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -42,40 +43,56 @@ lekerdezes=()=>{
         
       });
   }
+
   componentDidMount(){
     this.lekerdezes()
     
 }
 
+
+
+
+
   render(){
+
     if(this.state.isLoading){
       return(
-        <View style={{flex: 3,flexDirection: "row", padding: 20}}>
-          <ActivityIndicator size="large" color="#00ff00" />
+        <View style={{flex: 1, padding:20}}>
+          <ActivityIndicator/>
         </View>
       )
     }
+
     return(
-      <View  style={{display:"flex",flexDirection:"row",flex:3,paddingTop:20,}}>
-        
+      <View style={{flex: 1, paddingTop:20}}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 
 
-          <View >
-          <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.gyakorlat_nev} </Text>
-          <Image  source={{uri: 'http://localhost:8080/'+item.gyakorlat_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />  
+          <View style={{backgroundColor:"#B9F3EA", borderRadius:15, margin:10}}>
+
+          <Text style={{color:"#dd00cc",fontSize:18,marginTop:5, marginLeft:10}}>
+          {item.k_nev} </Text>
+          <Text style={{color:"black",fontSize:20, marginLeft:10}}>
+          {item.k_szoveg} </Text>
+          <Text style={{color:"black",fontSize:12, marginRight:10, marginBottom:5, textAlign:'right'}}>
+          {item.k_datum} </Text>
+     
+          
+          
 
           <TouchableOpacity
         style={styles.kekgomb}
-        onPress={async ()=>this.szavazat(item.id_gyakorlatok)}
+        onPress={async ()=>this.szavazat(item.k_id)}
       >
         <Text style={{color:"white",fontWeight:"bold",fontSize:15}}  >Törlés</Text>
       </TouchableOpacity>
           </View>
         
         }
-          keyExtractor={({id_gyakorlatok}, index) => id_gyakorlatok}
+
+        
+          keyExtractor={({k_id}, index) => k_id}
         />
       </View>
     );
